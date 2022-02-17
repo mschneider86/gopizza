@@ -18,6 +18,7 @@ type User = {
 
 type AuthContextData = {
   signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
   isSigningIn: boolean;
   user: User | null;
 };
@@ -33,6 +34,12 @@ export const AuthContext = createContext({} as AuthContextData);
 function AuthProvider({ children }: AuthProviderProps) {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+
+  async function signOut() {
+    await auth().signOut();
+    await AsyncStorage.removeItem(USER_COLLECTION);
+    setUser(null);
+  }
 
   async function signIn(email: string, password: string) {
     if (!email || !password) {
@@ -101,7 +108,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, isSigningIn, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, isSigningIn, user }}>
       {children}
     </AuthContext.Provider>
   );
