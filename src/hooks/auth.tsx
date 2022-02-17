@@ -1,4 +1,10 @@
-import React, { createContext, useContext, ReactNode, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { Alert } from 'react-native';
@@ -76,6 +82,23 @@ function AuthProvider({ children }: AuthProviderProps) {
       })
       .finally(() => setIsSigningIn(false));
   }
+
+  async function loadUserStorageData() {
+    setIsSigningIn(true);
+
+    const storedUser = await AsyncStorage.getItem(USER_COLLECTION);
+
+    if (storedUser) {
+      const userData = JSON.parse(storedUser) as User;
+      setUser(userData);
+    }
+
+    setIsSigningIn(false);
+  }
+
+  useEffect(() => {
+    loadUserStorageData();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ signIn, isSigningIn, user }}>
