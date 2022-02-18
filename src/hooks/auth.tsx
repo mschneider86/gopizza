@@ -19,6 +19,7 @@ type User = {
 type AuthContextData = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
   isSigningIn: boolean;
   user: User | null;
 };
@@ -90,6 +91,22 @@ function AuthProvider({ children }: AuthProviderProps) {
       .finally(() => setIsSigningIn(false));
   }
 
+  async function forgotPassword(email: string) {
+    if (!email) {
+      return Alert.alert('Redefinir senha', 'Informe o e-mail');
+    }
+
+    await auth()
+      .sendPasswordResetEmail(email)
+      .then(() =>
+        Alert.alert(
+          'Redefinir senha',
+          'Enviamos um e-mail com um link para redefinir sua senha.'
+        )
+      )
+      .catch(() => Alert.alert('Redefinir senha', 'Erro ao recuperar senha'));
+  }
+
   async function loadUserStorageData() {
     setIsSigningIn(true);
 
@@ -108,7 +125,9 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, isSigningIn, user }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, forgotPassword, isSigningIn, user }}
+    >
       {children}
     </AuthContext.Provider>
   );
