@@ -2,7 +2,14 @@ import React from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
 import { BackButton } from '@components/BackButton';
 import { Photo } from '@components/Photo';
-import { Container, Header, Title, DeleteLabel } from './styles';
+import {
+  Container,
+  Header,
+  Title,
+  DeleteLabel,
+  Upload,
+  PickImageButton,
+} from './styles';
 
 export function Product() {
   return (
@@ -17,7 +24,11 @@ export function Product() {
         </TouchableOpacity>
       </Header>
 
-      <Photo uri='' />
+      <Upload>
+        <Photo uri='' />
+
+        <PickImageButton title='Carregar' type='secondary' />
+      </Upload>
     </Container>
   );
 }
