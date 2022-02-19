@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
 import { BackButton } from '@components/BackButton';
 import { Photo } from '@components/Photo';
+import { PriceInput } from '@components/PriceInput';
+
 import * as ImagePicker from 'expo-image-picker';
 import {
   Container,
@@ -51,6 +53,10 @@ export function Product() {
           onPress={handlePickImage}
         />
       </Upload>
+
+      <PriceInput size='P' />
+      <PriceInput size='M' />
+      <PriceInput size='G' />
     </Container>
   );
 }
