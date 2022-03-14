@@ -23,6 +23,12 @@ import {
 
 export function Product() {
   const [image, setImage] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [priceSizeP, setPriceSizeP] = useState('');
+  const [priceSizeM, setPriceSizeM] = useState('');
+  const [priceSizeG, setPriceSizeG] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handlePickImage() {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -65,7 +71,7 @@ export function Product() {
         <Form>
           <InputGroup>
             <Label>Nome</Label>
-            <Input />
+            <Input onChangeText={setName} value={name} />
           </InputGroup>
 
           <InputGroup>
@@ -74,18 +80,36 @@ export function Product() {
               <MaxCharacters>0 de 60 caracteres</MaxCharacters>
             </InputGroupHeader>
 
-            <Input multiline maxLength={60} style={{ height: 80 }} />
+            <Input
+              onChangeText={setDescription}
+              value={description}
+              multiline
+              maxLength={60}
+              style={{ height: 80 }}
+            />
           </InputGroup>
 
           <InputGroup>
             <Label>Tamanhos e preços</Label>
 
-            <PriceInput size='P' />
-            <PriceInput size='M' />
-            <PriceInput size='G' />
+            <PriceInput
+              size='P'
+              onChangeText={setPriceSizeP}
+              value={priceSizeP}
+            />
+            <PriceInput
+              size='M'
+              onChangeText={setPriceSizeM}
+              value={priceSizeM}
+            />
+            <PriceInput
+              size='G'
+              onChangeText={setPriceSizeG}
+              value={priceSizeG}
+            />
           </InputGroup>
 
-          <Button title='Cadastrar pizza' />
+          <Button title='Cadastrar pizza' isLoading={isLoading} />
         </Form>
       </ScrollView>
     </Container>
