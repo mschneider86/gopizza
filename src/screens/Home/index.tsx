@@ -53,6 +53,11 @@ export function Home() {
     fetchPizzas(search);
   }
 
+  function handleClearSearch() {
+    setSearch('');
+    fetchPizzas('');
+  }
+
   useEffect(() => {
     fetchPizzas('');
   }, []);
@@ -74,7 +79,7 @@ export function Home() {
         onChangeText={setSearch}
         value={search}
         onSearch={handleSearch}
-        onClear={() => {}}
+        onClear={handleClearSearch}
       />
 
       <MenuHeader>
