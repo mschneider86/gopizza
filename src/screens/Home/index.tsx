@@ -3,7 +3,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import happyEmoji from '@assets/happy.png';
 import { useTheme } from 'styled-components/native';
+
 import { Search } from '@components/Search';
+import { ProductCard } from '@components/ProductCard';
 
 import {
   Container,
@@ -38,6 +40,15 @@ export function Home() {
         <Title>Cardápio</Title>
         <MenuItemsNumber>10 pizzas</MenuItemsNumber>
       </MenuHeader>
+
+      <ProductCard
+        data={{
+          id: '1',
+          name: 'Pizza teste',
+          description: 'Ingredientes da pizza teste',
+          photo_url: 'https://github.com/mschneider86.png',
+        }}
+      />
     </Container>
   );
 }

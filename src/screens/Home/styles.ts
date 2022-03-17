@@ -52,8 +52,8 @@ export const MenuItemsNumber = styled.Text`
   font-size: 14px;
 
   ${({ theme }) => css`
-    font-family: ${theme.FONTS.TEXT}
-    color: ${theme.COLORS.SECONDARY_900}
+    font-family: ${theme.FONTS.TEXT};
+    color: ${theme.COLORS.SECONDARY_900};
   `}
 `;
 
@@ -62,7 +62,7 @@ export const Title = styled.Text`
   line-height: 20px;
 
   ${({ theme }) => css`
-    font-family: ${theme.FONTS.TITLE}
-    color: ${theme.COLORS.SECONDARY_900}
+    font-family: ${theme.FONTS.TITLE};
+    color: ${theme.COLORS.SECONDARY_900};
   `}
 `;
