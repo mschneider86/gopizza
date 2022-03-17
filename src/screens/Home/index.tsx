@@ -22,6 +22,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export function Home() {
   const [pizzas, setPizzas] = useState<ProductProps[]>([]);
+  const [search, setSearch] = useState('');
   const { COLORS } = useTheme();
 
   function fetchPizzas(value: string) {
@@ -48,6 +49,10 @@ export function Home() {
       );
   }
 
+  function handleSearch() {
+    fetchPizzas(search);
+  }
+
   useEffect(() => {
     fetchPizzas('');
   }, []);
@@ -65,7 +70,12 @@ export function Home() {
         </TouchableOpacity>
       </Header>
 
-      <Search onSearch={() => {}} onClear={() => {}} />
+      <Search
+        onChangeText={setSearch}
+        value={search}
+        onSearch={handleSearch}
+        onClear={() => {}}
+      />
 
       <MenuHeader>
         <Title>Cardápio</Title>
