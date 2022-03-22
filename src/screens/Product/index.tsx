@@ -7,6 +7,9 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import { useRoute } from '@react-navigation/native';
+
+import { ProductNavigationProps } from '@src/@types/navigation';
 
 import * as ImagePicker from 'expo-image-picker';
 import {
@@ -31,6 +34,9 @@ export function Product() {
   const [priceSizeM, setPriceSizeM] = useState('');
   const [priceSizeG, setPriceSizeG] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const route = useRoute();
+  const { id } = route.params as ProductNavigationProps;
 
   async function handlePickImage() {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
