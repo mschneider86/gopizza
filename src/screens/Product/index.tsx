@@ -7,7 +7,7 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { ProductProps } from '@components/ProductCard';
 
 import { ProductNavigationProps } from '@src/@types/navigation';
@@ -45,6 +45,8 @@ export function Product() {
   const [priceSizeM, setPriceSizeM] = useState('');
   const [priceSizeG, setPriceSizeG] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigation = useNavigation();
 
   const route = useRoute();
   const { id } = route.params as ProductNavigationProps;
@@ -110,6 +112,10 @@ export function Product() {
     setIsLoading(false);
   }
 
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   useEffect(() => {
     if (id) {
       firestore()
@@ -134,7 +140,7 @@ export function Product() {
     <Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header>
-          <BackButton />
+          <BackButton onPress={handleGoBack} />
 
           <Title>Cadastrar</Title>
 

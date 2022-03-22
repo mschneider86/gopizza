@@ -17,6 +17,7 @@ import {
   MenuHeader,
   MenuItemsNumber,
   Title,
+  NewProductButton,
 } from './styles';
 import { FlatList } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -65,6 +66,10 @@ export function Home() {
     navigation.navigate('product', { id });
   }
 
+  function handleAdd() {
+    navigation.navigate('product', {});
+  }
+
   useEffect(() => {
     fetchPizzas('');
   }, []);
@@ -106,6 +111,12 @@ export function Home() {
           paddingBottom: 125,
           marginHorizontal: 24,
         }}
+      />
+
+      <NewProductButton
+        title='Cadastrar Pizza'
+        type='secondary'
+        onPress={handleAdd}
       />
     </Container>
   );
