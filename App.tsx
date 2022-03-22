@@ -3,11 +3,12 @@ import { useFonts, DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components/native';
-import { SignIn } from '@screens/SignIn';
+
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider } from '@hooks/auth';
 
 import theme from './src/theme';
+import { Routes } from '@src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,7 +25,7 @@ export default function App() {
       <StatusBar style='light' translucent backgroundColor='transparent' />
 
       <AuthProvider>
-        <SignIn />
+        <Routes />
       </AuthProvider>
     </ThemeProvider>
   );
