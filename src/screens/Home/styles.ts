@@ -1,20 +1,15 @@
 import styled, { css } from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from 'react-native-iphone-x-helper';
+import { ProductProps } from '@components/ProductCard';
+import { Button } from '@components/Button';
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
-`;
-
-export const Header = styled(LinearGradient).attrs(({ theme }) => ({
-  colors: theme.COLORS.GRADIENT,
-}))`
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: ${getStatusBarHeight() + 33}px 24px 58px;
 `;
 
 export const Greeting = styled.View`
@@ -48,21 +43,36 @@ export const MenuHeader = styled.View`
   border-bottom-color: ${({ theme }) => theme.COLORS.SHAPE};
 `;
 
-export const MenuItemsNumber = styled.Text`
-  font-size: 14px;
-
-  ${({ theme }) => css`
-    font-family: ${theme.FONTS.TEXT};
-    color: ${theme.COLORS.SECONDARY_900};
-  `}
-`;
-
 export const Title = styled.Text`
   font-size: 20px;
   line-height: 20px;
 
   ${({ theme }) => css`
     font-family: ${theme.FONTS.TITLE};
+    color: ${theme.COLORS.SECONDARY_900};
+  `}
+`;
+
+export const NewProductButton = styled(Button)`
+  margin: 0 24px;
+  margin-bottom: ${getBottomSpace() + 12}px;
+`;
+
+export const Header = styled(LinearGradient).attrs(({ theme }) => ({
+  colors: theme.COLORS.GRADIENT,
+}))`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${getStatusBarHeight() + 33}px 24px 58px;
+`;
+
+export const MenuItemsNumber = styled.Text`
+  font-size: 14px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.FONTS.TEXT};
     color: ${theme.COLORS.SECONDARY_900};
   `}
 `;
