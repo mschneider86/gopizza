@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import {
+  Platform,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  View,
+} from 'react-native';
 import { BackButton } from '@components/BackButton';
 import { Photo } from '@components/Photo';
 import { PriceInput } from '@components/PriceInput';
@@ -144,19 +150,25 @@ export function Product() {
 
           <Title>Cadastrar</Title>
 
-          <TouchableOpacity>
-            <DeleteLabel>Deletar</DeleteLabel>
-          </TouchableOpacity>
+          {id ? (
+            <TouchableOpacity>
+              <DeleteLabel>Deletar</DeleteLabel>
+            </TouchableOpacity>
+          ) : (
+            <View style={{ width: 20 }} />
+          )}
         </Header>
 
         <Upload>
           <Photo uri={image} />
 
-          <PickImageButton
-            title='Carregar'
-            type='secondary'
-            onPress={handlePickImage}
-          />
+          {!id && (
+            <PickImageButton
+              title='Carregar'
+              type='secondary'
+              onPress={handlePickImage}
+            />
+          )}
         </Upload>
 
         <Form>
@@ -200,11 +212,13 @@ export function Product() {
             />
           </InputGroup>
 
-          <Button
-            title='Cadastrar pizza'
-            isLoading={isLoading}
-            onPress={handleAdd}
-          />
+          {!id && (
+            <Button
+              title='Cadastrar Pizza'
+              isLoading={isLoading}
+              onPress={handleAdd}
+            />
+          )}
         </Form>
       </ScrollView>
     </Container>
